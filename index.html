@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-brain"></i> AI Resume Analyzer</h1>
+                <p>Upload your resume and get AI-powered insights to improve your job applications</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3>Upload Your Resume</h3>
+                    <p>Drag and drop your resume here or click to browse</p>
+                    <input type="file" id="fileInput" accept=".pdf,.doc,.docx" hidden>
+                    <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                        Choose File
+                    </button>
+                </div>
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <i class="fas fa-file-alt"></i>
+                    <span id="fileName"></span>
+                    <button class="remove-file" id="removeFile">×</button>
+                </div>
+            </div>
+
+            <div class="job-description-section">
+                <h3><i class="fas fa-briefcase"></i> Job Description (Optional)</h3>
+                <textarea id="jobDescription" placeholder="Paste the job description here to get tailored recommendations..."></textarea>
+            </div>
+
+            <div class="analyze-section">
+                <button class="analyze-btn" id="analyzeBtn" disabled>
+                    <i class="fas fa-search"></i> Analyze Resume
+                </button>
+            </div>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-header">
+                    <h2><i class="fas fa-chart-line"></i> Analysis Results</h2>
+                </div>
+
+                <div class="results-grid">
+                    <div class="score-card">
+                        <div class="score-circle" id="overallScore">
+                            <div class="score-value">85</div>
+                            <div class="score-label">Overall Score</div>
+                        </div>
+                    </div>
+
+                    <div class="metrics-cards">
+                        <div class="metric-card">
+                            <div class="metric-icon skills">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="metric-content">
+                                <h4>Skills Match</h4>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width: 78%"></div>
+                                </div>
+                                <span>78%</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon experience">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div class="metric-content">
+                                <h4>Experience</h4>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width: 85%"></div>
+                                </div>
+                                <span>85%</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon education">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="metric-content">
+                                <h4>Education</h4>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width: 90%"></div>
+                                </div>
+                                <span>90%</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon format">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="metric-content">
+                                <h4>Format</h4>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width: 82%"></div>
+                                </div>
+                                <span>82%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analysis-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="strengths">
+                            <i class="fas fa-thumbs-up"></i> Strengths
+                        </button>
+                        <button class="tab-btn" data-tab="improvements">
+                            <i class="fas fa-exclamation-triangle"></i> Improvements
+                        </button>
+                        <button class="tab-btn" data-tab="keywords">
+                            <i class="fas fa-key"></i> Keywords
+                        </button>
+                        <button class="tab-btn" data-tab="recommendations">
+                            <i class="fas fa-lightbulb"></i> Recommendations
+                        </button>
+                    </div>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="strengths">
+                            <div class="analysis-item">
+                                <h4><i class="fas fa-check-circle"></i> Strong Technical Skills</h4>
+                                <p>Your resume demonstrates proficiency in relevant technologies including JavaScript, Python, and React.</p>
+                            </div>
+                            <div class="analysis-item">
+                                <h4><i class="fas fa-check-circle"></i> Relevant Experience</h4>
+                                <p>You have 5+ years of experience in software development with progressive responsibility.</p>
+                            </div>
+                            <div class="analysis-item">
+                                <h4><i class="fas fa-check-circle"></i> Clear Structure</h4>
+                                <p>Your resume is well-organized with clear sections and consistent formatting.</p>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="improvements">
+                            <div class="analysis-item warning">
+                                <h4><i class="fas fa-exclamation-triangle"></i> Missing Quantifiable Achievements</h4>
+                                <p>Add specific metrics and numbers to demonstrate your impact (e.g., "Increased performance by 40%").</p>
+                            </div>
+                            <div class="analysis-item warning">
+                                <h4><i class="fas fa-exclamation-triangle"></i> Lack of Action Verbs</h4>
+                                <p>Use more dynamic action verbs like "implemented," "optimized," or "developed" instead of passive language.</p>
+                            </div>
+                            <div class="analysis-item warning">
+                                <h4><i class="fas fa-exclamation-triangle"></i> Generic Summary</h4>
+                                <p>Your professional summary could be more specific to the target role and industry.</p>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="keywords">
+                            <div class="keywords-section">
+                                <div class="keywords-found">
+                                    <h4><i class="fas fa-check"></i> Found Keywords</h4>
+                                    <div class="keyword-tags">
+                                        <span class="keyword-tag found">JavaScript</span>
+                                        <span class="keyword-tag found">React</span>
+                                        <span class="keyword-tag found">Python</span>
+                                        <span class="keyword-tag found">SQL</span>
+                                        <span class="keyword-tag found">Git</span>
+                                    </div>
+                                </div>
+                                <div class="keywords-missing">
+                                    <h4><i class="fas fa-times"></i> Missing Keywords</h4>
+                                    <div class="keyword-tags">
+                                        <span class="keyword-tag missing">Node.js</span>
+                                        <span class="keyword-tag missing">Docker</span>
+                                        <span class="keyword-tag missing">AWS</span>
+                                        <span class="keyword-tag missing">Agile</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="recommendations">
+                            <div class="analysis-item recommendation">
+                                <h4><i class="fas fa-lightbulb"></i> Add a Professional Summary</h4>
+                                <p>Include a 2-3 line summary at the top highlighting your key strengths and career objectives.</p>
+                            </div>
+                            <div class="analysis-item recommendation">
+                                <h4><i class="fas fa-lightbulb"></i> Include More Technical Skills</h4>
+                                <p>Add skills like Docker, AWS, and microservices to better match job requirements.</p>
+                            </div>
+                            <div class="analysis-item recommendation">
+                                <h4><i class="fas fa-lightbulb"></i> Quantify Your Impact</h4>
+                                <p>Add specific numbers and percentages to demonstrate your contributions and achievements.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="download-section">
+                    <button class="download-btn">
+                        <i class="fas fa-download"></i> Download Report
+                    </button>
+                    <button class="share-btn">
+                        <i class="fas fa-share-alt"></i> Share Results
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <div class="loading-spinner">
+                <i class="fas fa-brain fa-spin"></i>
+                <p>Analyzing your resume...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html>
