@@ -15,7 +15,7 @@
     "express": "^5.1.0",
     "express-rate-limit": "^7.5.1",
     "helmet": "^8.1.0",
-    "mammoth": "^1.9.1",
+    "mammoth": "^1.10.0",
     "multer": "^2.0.1",
     "natural": "^8.1.0",
     "openai": "^5.9.0",
